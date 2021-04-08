@@ -4,6 +4,7 @@
     {
         _MainTex ("Texture", 2D) = "black" {}
         _Tint("Tint", Vector) = (0.2, 0.8, 1.0, 1.0)
+        _Intensity("Intensity", Float)=0.3
     }
     SubShader
     {
@@ -37,6 +38,7 @@
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float3 _Tint;
+            float _Intensity;
             v2f vert (appdata v)
             {
                 v2f o;
@@ -55,7 +57,7 @@
                 float perlinNoise1 = PerlinNoise3D_FBM6(123, offset + normalize(i.posW), float2(0.5f, 0.5f));
 
                 float value1 = 1.0f - pow(abs(perlinNoise1), 0.1f);
-                fixed4 col = 0.3f * fixed4(_Tint.xyz, 1.0f) * fixed4(value1, value1, value1, 1.0f);
+                fixed4 col = _Intensity * fixed4(_Tint.xyz, 1.0f) * fixed4(value1, value1, value1, 1.0f);
                 return col;
             }
             ENDCG

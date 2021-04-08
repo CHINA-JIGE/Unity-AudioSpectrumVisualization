@@ -60,3 +60,7 @@ crashlytics-build.properties
 
 *.mp3
 *.meta
+
+/Build
+/Build2
+/Assets/Polygonal Particles
